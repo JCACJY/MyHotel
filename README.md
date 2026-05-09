@@ -23,6 +23,13 @@ MyHotel 是一个前后端分离的酒店管理系统示例项目。前端基于
 
 ## 快速开始
 
+项目克隆：
+
+```bash
+git clone https://github.com/JCACJY/MyHotel.git
+cd ./MyHotel
+```
+
 在项目根目录执行：
 
 ```bash
