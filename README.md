@@ -101,7 +101,7 @@ http://localhost:8080/
 
 ## 功能演示
 
-- ### [演示视频](./docs/img/视频.mov)
+- ### [演示视频](./docs/img/演示视频.mp4)
 
 - ### 首页
 ![首页](./docs/img/主页1.png) 
