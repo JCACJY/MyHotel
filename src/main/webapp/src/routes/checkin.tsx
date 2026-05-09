@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ordersStore, useOrders, type Order } from "@/lib/hotel-store";
 import { toast } from "sonner";
 import { KeyRound, Search, CheckCircle2, ShieldCheck, Clock, Wifi, Coffee, BedDouble } from "lucide-react";
@@ -15,30 +15,32 @@ export const Route = createFileRoute("/checkin")({
   component: CheckinPage,
 });
 
-function assignRoom() {
-  const floor = Math.floor(Math.random() * 12) + 8;
-  const num = Math.floor(Math.random() * 20) + 1;
-  return `${floor}${String(num).padStart(2, "0")}`;
-}
-
 function CheckinPage() {
   const search = Route.useSearch();
   useOrders(); // subscribe for live updates
   const [q, setQ] = useState(search.q || "");
   const [idTail, setIdTail] = useState("");
-  const [found, setFound] = useState<Order | null>(() =>
-    search.q ? ordersStore.getAll().find((o) => o.id === search.q) || null : null,
-  );
+  const [found, setFound] = useState<Order | null>(null);
   const [done, setDone] = useState<{ order: Order; room: string } | null>(null);
 
-  function handleSearch(e: React.FormEvent) {
+  useEffect(() => {
+    if (!search.q) return;
+    void ordersStore.getById(search.q).then((order) => {
+      setFound(order);
+      if (order) {
+        toast.success("订单核验成功", { description: `${order.guestName} · ${order.roomTypeName}` });
+      }
+    });
+  }, [search.q]);
+
+  async function handleSearch(e: React.FormEvent) {
     e.preventDefault();
     const kw = q.trim();
     if (!kw) {
       toast.error("请输入订单号");
       return;
     }
-    const order = ordersStore.getAll().find((o) => o.id.toLowerCase() === kw.toLowerCase());
+    const order = await ordersStore.getById(kw);
     if (!order) {
       toast.error("未查询到该订单", { description: "请确认订单号是否正确" });
       setFound(null);
@@ -49,7 +51,7 @@ function CheckinPage() {
     toast.success("订单核验成功", { description: `${order.guestName} · ${order.roomTypeName}` });
   }
 
-  function handleCheckin() {
+  async function handleCheckin() {
     if (!found) return;
     if (found.status === "checked_in") {
       toast.info("该订单已办理入住", { description: `房间号 ${found.roomNumber}` });
@@ -69,12 +71,15 @@ function CheckinPage() {
       toast.error("证件号后 4 位不匹配", { description: "请确认入住人身份信息" });
       return;
     }
-    const room = assignRoom();
-    ordersStore.update(found.id, { status: "checked_in", roomNumber: room });
-    const updated: Order = { ...found, status: "checked_in", roomNumber: room };
-    setFound(updated);
-    setDone({ order: updated, room });
-    toast.success("入住办理成功", { description: `欢迎入住 ${room} 房` });
+    try {
+      const updated = await ordersStore.checkin(found.id, tail);
+      const room = updated.roomNumber || "";
+      setFound(updated);
+      setDone({ order: updated, room });
+      toast.success("入住办理成功", { description: `欢迎入住 ${room} 房` });
+    } catch (error) {
+      toast.error("入住办理失败", { description: error instanceof Error ? error.message : "请稍后重试" });
+    }
   }
 
   if (done) return <KeyCard order={done.order} room={done.room} onBack={() => setDone(null)} />;

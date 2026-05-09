@@ -34,7 +34,7 @@ function Booking() {
   const nights = useMemo(() => diffNights(checkIn, checkOut), [checkIn, checkOut]);
   const total = nights * room.price;
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!guestName || !phone || !idNumber) {
       toast.error("请填写完整入住人信息");
@@ -44,20 +44,24 @@ function Booking() {
       toast.error("退房日期需晚于入住日期");
       return;
     }
-    const order = ordersStore.add({
-      guestName,
-      phone,
-      idNumber,
-      roomTypeId: room.id,
-      roomTypeName: room.name,
-      checkIn,
-      checkOut,
-      nights,
-      guests,
-      totalPrice: total,
-    });
-    toast.success("预定成功", { description: `订单号 ${order.id}，已发送至您的手机` });
-    navigate({ to: "/orders", search: { q: order.id } as never });
+    try {
+      const order = await ordersStore.add({
+        guestName,
+        phone,
+        idNumber,
+        roomTypeId: room.id,
+        roomTypeName: room.name,
+        checkIn,
+        checkOut,
+        nights,
+        guests,
+        totalPrice: total,
+      });
+      toast.success("预定成功", { description: `订单号 ${order.id}，已发送至您的手机` });
+      navigate({ to: "/orders", search: { q: order.id } as never });
+    } catch (error) {
+      toast.error("预定失败", { description: error instanceof Error ? error.message : "请稍后重试" });
+    }
   }
 
   return (
