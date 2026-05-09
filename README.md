@@ -101,6 +101,9 @@ http://localhost:8080/
 
 ## 功能演示
 
+- ### 视频
+<video src="./docs/img/视频.mov" controls width="50%"></video>
+
 - ### 首页
 ![首页](./docs/img/主页1.png) 
 ![首页](./docs/img/主页2.png)
@@ -121,3 +124,5 @@ http://localhost:8080/
 ![入住成功](./docs/img/入住成功.png)
 - ### 已入住
 ![已入住](./docs/img/已入住.png)
+
+
