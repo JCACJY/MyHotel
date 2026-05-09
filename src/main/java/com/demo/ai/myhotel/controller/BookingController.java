@@ -1,0 +1,30 @@
+package com.demo.ai.myhotel.controller;
+
+import com.demo.ai.myhotel.dto.ApiResponse;
+import com.demo.ai.myhotel.dto.BookingRequest;
+import com.demo.ai.myhotel.dto.OrderResponse;
+import com.demo.ai.myhotel.service.BookingService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/bookings")
+public class BookingController {
+
+    private final BookingService bookingService;
+
+    public BookingController(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ApiResponse<OrderResponse> createBooking(@Valid @RequestBody BookingRequest request) {
+        return ApiResponse.created(bookingService.createBooking(request));
+    }
+}

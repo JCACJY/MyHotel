@@ -21,9 +21,10 @@ function Index() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/40 to-primary/80" />
         <div className="relative z-10 container mx-auto h-full px-6 flex flex-col justify-center text-primary-foreground">
-          <p className="text-gold tracking-[0.3em] text-xs mb-4">QIYUN · PULI HOTEL</p>
+          <p className="text-gold tracking-[0.3em] text-xs mb-4">HUAZHU HOTELS GROUP</p>
           <h1 className="font-display text-5xl md:text-7xl max-w-3xl leading-tight">
-            一处栖息，<br />一段优雅时光
+            <span className="block">华住新篇，</span>
+            <span className="block pl-[2em]">悦享非凡</span>
           </h1>
           <p className="mt-6 max-w-xl text-primary-foreground/80">
             从城市天际线到静谧客房，我们以匠心服务，让每一次到访都成为难忘旅程。
