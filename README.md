@@ -32,7 +32,7 @@ cd ./MyHotel
 
 下面提供了两种启动方式，任选其一即可：
 - ①本地启动
-- ②docker容器启动
+- ②Docker容器启动
 
 ### ①本地启动
 
@@ -52,7 +52,7 @@ cd -
 Step2、启动后端服务：
 
 ```bash
-# 注意：切回项目根目录
+# 注意：确保在项目根目录下执行
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 ./mvnw spring-boot:run
 ```
@@ -60,7 +60,7 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 Step3、另开一个终端启动前端开发服务：
 
 ```bash
-# 注意：切回项目根目录
+# 注意：确保在项目根目录下执行
 cd src/main/webapp
 npm run dev -- --host 127.0.0.1 --port 8080
 ```
@@ -97,26 +97,23 @@ http://localhost:8080/
 
 ## 功能演示
 
-- 首页
+- ### 首页
 ![首页](./docs/img/主页1.png) 
 ![首页](./docs/img/主页2.png)
 
-
-- 预定
+- ### 预定
 ![预定](./docs/img/预定.png)
 
-
-- 订单列表
+- ### 订单列表
 ![订单列表](./docs/img/订单列表.png)
-- 订单搜索
+- ### 订单搜索
 ![订单搜索](./docs/img/订单搜索.png)
 
-
-- 办理入住
+- ### 办理入住
 ![办理入住](./docs/img/办理入住.png)
-- 身份核验
+- ### 身份核验
 ![身份核验](./docs/img/身份核验.png)
-- 入住成功
+- ### 入住成功
 ![入住成功](./docs/img/入住成功.png)
-- 已入住
+- ### 已入住
 ![已入住](./docs/img/已入住.png)
