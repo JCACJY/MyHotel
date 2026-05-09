@@ -23,14 +23,20 @@ MyHotel 是一个前后端分离的酒店管理系统示例项目。前端基于
 
 ## 快速开始
 
-项目克隆：
+请使用以下命令将项目克隆至本地，并进入项目根目录：
 
 ```bash
 git clone https://github.com/JCACJY/MyHotel.git
 cd ./MyHotel
 ```
 
-在项目根目录执行：
+下面提供了两种启动方式，任选其一即可：
+- ①本地启动
+- ②docker容器启动
+
+### ①本地启动
+
+Step1、在项目根目录执行：
 
 ```bash
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
@@ -43,7 +49,7 @@ npm run build
 cd -
 ```
 
-启动后端服务：
+Step2、启动后端服务：
 
 ```bash
 # 注意：切回项目根目录
@@ -51,7 +57,7 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 ./mvnw spring-boot:run
 ```
 
-另开一个终端启动前端开发服务：
+Step3、另开一个终端启动前端开发服务：
 
 ```bash
 # 注意：切回项目根目录
@@ -59,7 +65,29 @@ cd src/main/webapp
 npm run dev -- --host 127.0.0.1 --port 8080
 ```
 
-浏览器访问：
+Step4、浏览器访问：
+
+```text
+http://localhost:8080/
+```
+
+---
+
+### ②Docker容器启动
+
+Step1、构建镜像：
+
+```bash
+docker build -t myhotel:latest .
+```
+
+Step2、启动容器：
+
+```bash
+docker run --rm -p 8080:8080 --name myhotel myhotel:latest
+```
+
+Step3、浏览器访问：
 
 ```text
 http://localhost:8080/
@@ -92,4 +120,3 @@ http://localhost:8080/
 ![入住成功](./docs/img/入住成功.png)
 - 已入住
 ![已入住](./docs/img/已入住.png)
-
