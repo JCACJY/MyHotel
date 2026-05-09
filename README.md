@@ -31,8 +31,10 @@ cd ./MyHotel
 ```
 
 下面提供了两种启动方式，任选其一即可：
-- [本地启动](#①本地启动)
-- [Docker容器启动](#②Docker容器启动)
+- [本地启动](#local-start)
+- [Docker 容器启动](#docker-start)
+
+<a id="local-start"></a>
 
 ### ①本地启动
 
@@ -72,6 +74,8 @@ http://localhost:8080/
 ```
 
 ---
+
+<a id="docker-start"></a>
 
 ### ②Docker容器启动
 
