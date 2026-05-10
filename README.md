@@ -69,9 +69,7 @@ npm run dev -- --host 127.0.0.1 --port 8080
 
 Step4、浏览器访问：
 
-```text
-http://localhost:8080/
-```
+<pre><code><a href="http://localhost:8080">http://localhost:8080</a></code></pre>
 
 ---
 
@@ -93,9 +91,7 @@ docker run --rm -p 8080:8080 --name myhotel myhotel:latest
 
 Step3、浏览器访问：
 
-```text
-http://localhost:8080/
-```
+<pre><code><a href="http://localhost:8080">http://localhost:8080</a></code></pre>
 
 ---
 
@@ -123,5 +119,4 @@ http://localhost:8080/
 ![入住成功](./docs/img/入住成功.png)
 - ### 已入住
 ![已入住](./docs/img/已入住.png)
-
 
