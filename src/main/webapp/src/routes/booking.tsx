@@ -140,7 +140,7 @@ function Booking() {
                   <select
                     value={guests}
                     onChange={(e) => setGuests(Number(e.target.value))}
-                    className="input pl-9"
+                    className="input guest-select"
                   >
                     {[1, 2, 3, 4].map((n) => (
                       <option key={n} value={n}>{n} 位</option>
@@ -209,6 +209,10 @@ function Booking() {
           font-size: 14px;
           outline: none;
           transition: border-color .15s, box-shadow .15s;
+        }
+        .guest-select {
+          padding-left: 40px;
+          padding-right: 36px;
         }
         .input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in oklab, var(--gold) 20%, transparent); }
       `}</style>
